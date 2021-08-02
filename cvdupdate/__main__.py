@@ -39,7 +39,7 @@ import coloredlogs
 from http.server import HTTPServer
 from RangeHTTPServer import RangeRequestHandler
 
-
+import auto_updater
 import pkg_resources
 from cvdupdate.cvdupdate import CVDUpdate
 
@@ -209,6 +209,7 @@ def serve(port: int, config: str, verbose: bool):
     m = CVDUpdate(config=config, verbose=verbose)
     os.chdir(str(m.db_dir))
     m.logger.info(f"Serving up {m.db_dir} on localhost:{port}...")
+    auto_updater.start()
 
     RangeRequestHandler.protocol_version = 'HTTP/1.0'
     # TODO(danvk): pick a random, available port
