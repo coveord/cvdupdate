@@ -200,7 +200,7 @@ def clean_all(config: str, verbose: bool):
 @cli.command("serve")
 @click.option("--config", "-c", type=click.Path(), required=False, default="", help="Config path. [optional]")
 @click.option("--verbose", "-V", is_flag=True, default=False, help="Verbose output. [optional]")
-@click.option("--update-interval-seconds", "-u",type=click.INT, required=False, default=0, help="Time in seconds before the next database update")
+@click.option("--update-interval-seconds", "-U", type=click.INT, required=False, default=0, help="Time in seconds before the next database update")
 @click.argument("port", type=int, required=False, default=8000)
 def serve(port: int, config: str, verbose: bool, update_interval_seconds: int):
     """
