@@ -2,16 +2,24 @@ name: Publish Python 🐍 distributions 📦 to PyPI
 
 on: release
 
+permissions:
+  contents: read
+
 jobs:
   build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@master
+    - name: Harden the runner (Audit all outbound calls)
+      uses: step-security/harden-runner@c6295a65d1254861815972266d5933fd6e532bdf # v2.11.1
+      with:
+        egress-policy: audit
+
+    - uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
 
     - name: Set up Python 3.7
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@0f07f7f756721ebd886c2462646a35f78a8bc4de # v1.2.4
       with:
         python-version: 3.7
 
@@ -32,6 +40,6 @@ jobs:
         .
 
     - name: Publish distribution 📦 to PyPI
-      uses: pypa/gh-action-pypi-publish@master
+      uses: pypa/gh-action-pypi-publish@c1b34028248d0c9f7d90fe29fef2122e2276ff6f # master
       with:
         password: ${{ secrets.PYPI_API_TOKEN }}
